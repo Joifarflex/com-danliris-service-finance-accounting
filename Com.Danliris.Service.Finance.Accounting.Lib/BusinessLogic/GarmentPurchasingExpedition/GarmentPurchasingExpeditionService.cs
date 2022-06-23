@@ -112,10 +112,10 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.GarmentPurch
                 query = query.Where(entity => !notPurchasingInternalNoteIds.Contains(entity.InternalNoteId));
             }
 
-            var count = query.ToList().Count();
-
             var orderDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(order);
             query = QueryHelper<GarmentPurchasingExpeditionModel>.Order(query, orderDictionary);
+
+            var count = query.ToList().Count();
 
             var data = query
                 .Skip((page - 1) * size)
